@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
   [SerializeField] float sideSpeed = 8f;
   [SerializeField] float forwardSpeed = 40f;
+  [SerializeField] float leftConstraint = -10.6f;
+  [SerializeField] float rightConstraint = -1.9f;
   [SerializeField] SpawnManager spawnManager;
 
   bool moveLeft;
@@ -14,6 +16,24 @@ public class PlayerController : MonoBehaviour
   void Update()
   {
     transform.position += Vector3.forward * forwardSpeed * Time.deltaTime;
+
+    if (transform.position.x > rightConstraint)
+    {
+      transform.position = new Vector3(
+        rightConstraint,
+        transform.position.y,
+        transform.position.z
+      );
+    }
+
+    if (transform.position.x < leftConstraint)
+    {
+      transform.position = new Vector3(
+        leftConstraint,
+        transform.position.y,
+        transform.position.z
+      );
+    }
 
     if (moveLeft)
     {
