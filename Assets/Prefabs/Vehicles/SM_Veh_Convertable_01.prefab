@@ -445,7 +445,7 @@ Transform:
   m_GameObject: {fileID: 1847148240549790}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4616178431518274}
@@ -554,14 +554,19 @@ MonoBehaviour:
   frontLeftTransform: {fileID: 4108543681628124}
   backRightTransform: {fileID: 4216438474971106}
   backLeftTransform: {fileID: 4566214152681674}
+  fixWheelsRotation: 0
+  frontRightRotationFix: 0
+  frontLeftRotationFix: 0
+  backRightRotationFix: 0
+  backLeftRotationFix: 0
   acceleration: 500
   initialAcceleration: 6000
-  maxSpeed: 120
-  keySpeed: 80
+  maxSpeed: 100
+  keySpeed: 70
   leftConstraint: -10.6
   rightConstraint: -1.9
   maxTurnAngle: 15
-  turnRate: 0.05
+  turnRate: 0.02
   spawnManager: {fileID: 0}
 --- !u!1 &1925197282100688
 GameObject:

@@ -96,7 +96,6 @@ GameObject:
   - component: {fileID: 23453952507279772}
   - component: {fileID: 6527833932383705346}
   - component: {fileID: 719583633}
-  - component: {fileID: 719583632}
   - component: {fileID: 719583634}
   m_Layer: 0
   m_Name: SM_Veh_Firetruck_01
@@ -114,7 +113,7 @@ Transform:
   m_GameObject: {fileID: 1209555985277952}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4867696658964076}
@@ -189,8 +188,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.796148, y: 2.8393257, z: 8.822845}
-  m_Center: {x: -0.00014130275, y: 1.5879507, z: -0.19174194}
+  m_Size: {x: 2.796148, y: 2.7164142, z: 8.770821}
+  m_Center: {x: -0, y: 1.6494066, z: -0.21775518}
 --- !u!54 &719583633
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -205,21 +204,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 2
+  m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &719583632
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1209555985277952}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.8500848, y: 2.839326, z: 8.822845}
-  m_Center: {x: 0.014352381, y: 1.5879507, z: -0.19174194}
 --- !u!114 &719583634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,7 +226,12 @@ MonoBehaviour:
   frontLeftTransform: {fileID: 4533898910731788}
   backRightTransform: {fileID: 4698808947176074}
   backLeftTransform: {fileID: 4369576596880992}
-  acceleration: 500
+  fixWheelsRotation: 0
+  frontRightRotationFix: 0
+  frontLeftRotationFix: 0
+  backRightRotationFix: 0
+  backLeftRotationFix: 0
+  acceleration: 1100
   initialAcceleration: 3000
   maxSpeed: 120
   keySpeed: 70
@@ -1031,7 +1022,7 @@ WheelCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4328897117781197743}
   m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 0.56
+  m_Radius: 0.565
   m_SuspensionSpring:
     spring: 35000
     damper: 4500
@@ -1128,7 +1119,7 @@ WheelCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4882947843964203646}
   m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 0.56
+  m_Radius: 0.565
   m_SuspensionSpring:
     spring: 35000
     damper: 4500
@@ -1190,7 +1181,7 @@ WheelCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7146203276176980891}
   m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 0.56
+  m_Radius: 0.565
   m_SuspensionSpring:
     spring: 35000
     damper: 4500
@@ -1252,7 +1243,7 @@ WheelCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7557561826757178083}
   m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 0.56
+  m_Radius: 0.565
   m_SuspensionSpring:
     spring: 35000
     damper: 4500

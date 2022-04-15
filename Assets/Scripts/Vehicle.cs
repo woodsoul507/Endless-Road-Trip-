@@ -12,6 +12,11 @@ public abstract class Vehicle : MonoBehaviour
   [SerializeField] protected Transform frontLeftTransform;
   [SerializeField] protected Transform backRightTransform;
   [SerializeField] protected Transform backLeftTransform;
+  [SerializeField] bool fixWheelsRotation = false;
+  [SerializeField] protected float frontRightRotationFix = 0f;
+  [SerializeField] protected float frontLeftRotationFix = 0f;
+  [SerializeField] protected float backRightRotationFix = 0f;
+  [SerializeField] protected float backLeftRotationFix = 0f;
   [SerializeField] float acceleration = 500f;
   [SerializeField] float initialAcceleration = 3000f;
   [SerializeField] float maxSpeed = 120f;
@@ -20,7 +25,7 @@ public abstract class Vehicle : MonoBehaviour
 
   protected float currSpeed;
 
-  float currentBrk = 0f;
+  float _currentBrk = 0f;
   Rigidbody _rigidbody;
 
   protected void Start()
@@ -47,15 +52,15 @@ public abstract class Vehicle : MonoBehaviour
       frontLeftWheel.motorTorque = 0f;
     }
 
-    frontRightWheel.brakeTorque = currentBrk;
-    frontLeftWheel.brakeTorque = currentBrk;
-    backRightWheel.brakeTorque = currentBrk;
-    backLeftWheel.brakeTorque = currentBrk;
+    frontRightWheel.brakeTorque = _currentBrk;
+    frontLeftWheel.brakeTorque = _currentBrk;
+    backRightWheel.brakeTorque = _currentBrk;
+    backLeftWheel.brakeTorque = _currentBrk;
 
-    UpdateWheel(frontRightWheel, frontRightTransform);
-    UpdateWheel(frontLeftWheel, frontLeftTransform);
-    UpdateWheel(backRightWheel, backRightTransform);
-    UpdateWheel(backLeftWheel, backLeftTransform);
+    UpdateWheel(frontRightWheel, frontRightTransform, frontRightRotationFix);
+    UpdateWheel(frontLeftWheel, frontLeftTransform, frontLeftRotationFix);
+    UpdateWheel(backRightWheel, backRightTransform, backRightRotationFix);
+    UpdateWheel(backLeftWheel, backLeftTransform, backLeftRotationFix);
   }
 
   protected virtual void Disable()
@@ -67,11 +72,15 @@ public abstract class Vehicle : MonoBehaviour
     }
   }
 
-  protected virtual void UpdateWheel(WheelCollider col, Transform trans)
+  protected virtual void UpdateWheel(WheelCollider col, Transform trans, float fixRotation)
   {
     Vector3 position;
     Quaternion rotation;
     col.GetWorldPose(out position, out rotation);
+    if (fixWheelsRotation)
+    {
+      rotation = rotation * Quaternion.Euler(new Vector3(0, fixRotation, 0));
+    }
     trans.position = position;
     trans.rotation = rotation;
   }

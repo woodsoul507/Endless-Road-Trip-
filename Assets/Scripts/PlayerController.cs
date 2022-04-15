@@ -8,7 +8,7 @@ public class PlayerController : Vehicle
   [SerializeField] float leftConstraint = -10.6f;
   [SerializeField] float rightConstraint = -1.9f;
   [SerializeField] float maxTurnAngle = 15f;
-  [SerializeField] float turnRate = 0.05f;
+  [SerializeField] float turnRate = 0.02f;
   [SerializeField] SpawnManager spawnManager;
 
   bool moveLeft;
@@ -44,7 +44,7 @@ public class PlayerController : Vehicle
       );
     }
 
-    Debug.Log("SPEED --- " + currSpeed);
+    // Debug.Log("SPEED --- " + currSpeed);
   }
 
   protected override void Turn()
@@ -61,6 +61,8 @@ public class PlayerController : Vehicle
 
     frontRightWheel.steerAngle = currentTurn;
     frontLeftWheel.steerAngle = currentTurn;
+
+    Debug.Log("TURN --- " + currentTurn);
   }
 
   void OnTriggerExit(Collider other)
