@@ -44,7 +44,7 @@ public class PlayerController : Vehicle
       );
     }
 
-    Debug.Log("SPEED ---" + base.currSpeed);
+    Debug.Log("SPEED --- " + currSpeed);
   }
 
   protected override void Turn()
