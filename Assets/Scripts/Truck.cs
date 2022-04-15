@@ -2,24 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Truck : Enemy
+public class Truck : Vehicle
 {
-  [SerializeField] float expectedVelocity = -2f;
-
-  Rigidbody _rigidbody;
-
-  void OnEnable()
+  protected override void Turn()
   {
-    _rigidbody = GetComponent<Rigidbody>();
-  }
-
-  void Update()
-  {
-    Movement();
-  }
-
-  protected override void Movement()
-  {
-    _rigidbody.AddForce(Vector3.forward * expectedVelocity, ForceMode.Impulse);
+    // Not needed
   }
 }

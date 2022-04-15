@@ -1,21 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Vehicle
 {
-  [SerializeField] float sideSpeed = 8f;
-  [SerializeField] float forwardSpeed = 40f;
   [SerializeField] float leftConstraint = -10.6f;
   [SerializeField] float rightConstraint = -1.9f;
+  [SerializeField] float maxTurnAngle = 15f;
+  [SerializeField] float turnRate = 0.05f;
   [SerializeField] SpawnManager spawnManager;
 
   bool moveLeft;
   bool moveRight;
+  float currentTurn = 0f;
 
-  void Update()
+  new void Start()
   {
-    transform.position += Vector3.forward * forwardSpeed * Time.deltaTime;
+    base.Start();
+  }
+
+  new void Update()
+  {
+    base.Update();
+
+    Turn();
 
     if (transform.position.x > rightConstraint)
     {
@@ -35,15 +44,23 @@ public class PlayerController : MonoBehaviour
       );
     }
 
-    if (moveLeft)
+    Debug.Log("SPEED ---" + base.currSpeed);
+  }
+
+  protected override void Turn()
+  {
+    if (moveLeft && Math.Abs(currentTurn) < maxTurnAngle)
     {
-      transform.position += Vector3.left * sideSpeed * Time.deltaTime;
+      currentTurn -= turnRate;
     }
 
-    if (moveRight)
+    if (moveRight && Math.Abs(currentTurn) < maxTurnAngle)
     {
-      transform.position += Vector3.right * sideSpeed * Time.deltaTime;
+      currentTurn += turnRate;
     }
+
+    frontRightWheel.steerAngle = currentTurn;
+    frontLeftWheel.steerAngle = currentTurn;
   }
 
   void OnTriggerExit(Collider other)
@@ -62,6 +79,7 @@ public class PlayerController : MonoBehaviour
   public void MoveLeftOff()
   {
     moveLeft = false;
+    currentTurn = 0f;
   }
 
   public void MoveRightOn()
@@ -72,5 +90,6 @@ public class PlayerController : MonoBehaviour
   public void MoveRightOff()
   {
     moveRight = false;
+    currentTurn = 0f;
   }
 }
