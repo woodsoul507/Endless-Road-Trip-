@@ -13,7 +13,9 @@ public abstract class Vehicle : MonoBehaviour
   [SerializeField] protected Transform backRightTransform;
   [SerializeField] protected Transform backLeftTransform;
   [SerializeField] float acceleration = 500f;
-  [SerializeField] float maxSpeed = 200f;
+  [SerializeField] float initialAcceleration = 3000f;
+  [SerializeField] float maxSpeed = 120f;
+  [SerializeField] float keySpeed = 80f;
   //[SerializeField] float breaking = 300f;
 
   protected float currSpeed;
@@ -36,8 +38,8 @@ public abstract class Vehicle : MonoBehaviour
   {
     if (currSpeed < maxSpeed)
     {
-      frontRightWheel.motorTorque = acceleration;
-      frontLeftWheel.motorTorque = acceleration;
+      frontRightWheel.motorTorque = currSpeed < keySpeed ? initialAcceleration : acceleration;
+      frontLeftWheel.motorTorque = currSpeed < keySpeed ? initialAcceleration : acceleration;
     }
     else
     {

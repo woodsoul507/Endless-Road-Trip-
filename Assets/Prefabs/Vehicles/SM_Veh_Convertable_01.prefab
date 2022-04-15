@@ -554,8 +554,10 @@ MonoBehaviour:
   frontLeftTransform: {fileID: 4108543681628124}
   backRightTransform: {fileID: 4216438474971106}
   backLeftTransform: {fileID: 4566214152681674}
-  acceleration: 4000
-  maxSpeed: 200
+  acceleration: 500
+  initialAcceleration: 6000
+  maxSpeed: 120
+  keySpeed: 80
   leftConstraint: -10.6
   rightConstraint: -1.9
   maxTurnAngle: 15
