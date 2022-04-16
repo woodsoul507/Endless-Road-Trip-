@@ -53,16 +53,24 @@ public class PlayerController : Vehicle
     {
       currentTurn -= turnRate;
     }
+    if (!moveLeft && transform.localEulerAngles.y > 180f)
+    {
+      Debug.Log("!moveLeft --- " + transform.localEulerAngles.y);
+      transform.Rotate(Vector3.up * Time.deltaTime * 5f);
+    }
 
     if (moveRight && Math.Abs(currentTurn) < maxTurnAngle)
     {
       currentTurn += turnRate;
     }
+    if (!moveRight && transform.localEulerAngles.y > 1f && transform.localEulerAngles.y < 180f)
+    {
+      Debug.Log("!moveRight --- " + transform.localEulerAngles.y);
+      transform.Rotate(Vector3.down * Time.deltaTime * 5f);
+    }
 
     frontRightWheel.steerAngle = currentTurn;
     frontLeftWheel.steerAngle = currentTurn;
-
-    Debug.Log("TURN --- " + currentTurn);
   }
 
   void OnTriggerExit(Collider other)

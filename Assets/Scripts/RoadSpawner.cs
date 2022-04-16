@@ -9,7 +9,6 @@ public class RoadSpawner : MonoBehaviour
 
   private float offSet = 50f;
 
-  // Start is called before the first frame update
   void Start()
   {
     if (roads != null && roads.Count > 0)

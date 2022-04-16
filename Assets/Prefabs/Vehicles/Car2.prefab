@@ -513,7 +513,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5448230454069218753
 Transform:
   m_ObjectHideFlags: 0
@@ -588,7 +588,7 @@ MonoBehaviour:
   backLeftRotationFix: -90
   acceleration: 500
   initialAcceleration: 3000
-  maxSpeed: 100
+  maxSpeed: 120
   keySpeed: 70
 --- !u!1 &5448230454367316996
 GameObject:

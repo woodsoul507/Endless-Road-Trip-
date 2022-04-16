@@ -521,7 +521,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4539974619004416
 Transform:
   m_ObjectHideFlags: 0
@@ -623,7 +623,7 @@ MonoBehaviour:
   acceleration: 1000
   initialAcceleration: 3000
   maxSpeed: 120
-  keySpeed: 60
+  keySpeed: 70
 --- !u!54 &2102064025331286832
 Rigidbody:
   m_ObjectHideFlags: 0
