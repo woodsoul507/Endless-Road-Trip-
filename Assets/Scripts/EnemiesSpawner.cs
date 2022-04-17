@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class EnemiesSpawner : MonoBehaviour
 {
-  public List<GameObject> enemies;
-  public List<float> lanes;
+  [SerializeField] List<GameObject> enemies;
+  [SerializeField] List<float> lanes;
+
   Vector3 _playerPosition;
   int _activeEnemies;
 

@@ -517,11 +517,11 @@ GameObject:
   - component: {fileID: 8072082492289394060}
   m_Layer: 0
   m_Name: SM_Veh_Bus_01
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4539974619004416
 Transform:
   m_ObjectHideFlags: 0
@@ -542,6 +542,7 @@ Transform:
   - {fileID: 4435133902934904}
   - {fileID: 6819656022132564458}
   - {fileID: 2739856030166990503}
+  - {fileID: 7583103827175757144}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -624,6 +625,8 @@ MonoBehaviour:
   initialAcceleration: 3000
   maxSpeed: 120
   keySpeed: 70
+  breakingForce: 600
+  _frontCollider: {fileID: 3448974180639554184}
 --- !u!54 &2102064025331286832
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1380,6 +1383,64 @@ WheelCollider:
     m_AsymptoteValue: 0.75
     m_Stiffness: 1
   m_Enabled: 1
+--- !u!1 &1148279818959187631
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7583103827175757144}
+  - component: {fileID: 736475761714282931}
+  - component: {fileID: 3448974180639554184}
+  m_Layer: 0
+  m_Name: FrontCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7583103827175757144
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148279818959187631}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.79, z: 7.33}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4539974619004416}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &736475761714282931
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148279818959187631}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0440538, y: 2.6508539, z: 5.4576216}
+  m_Center: {x: 0, y: 0.8254266, z: 2.018809}
+--- !u!114 &3448974180639554184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148279818959187631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0957031cf461ed94c95121aedfba0200, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1540353995900233998
 GameObject:
   m_ObjectHideFlags: 0

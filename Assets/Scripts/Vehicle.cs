@@ -20,12 +20,13 @@ public abstract class Vehicle : MonoBehaviour
   [SerializeField] float acceleration = 500f;
   [SerializeField] float initialAcceleration = 3000f;
   [SerializeField] float maxSpeed = 120f;
-  [SerializeField] float keySpeed = 80f;
-  //[SerializeField] float breaking = 300f;
+  [SerializeField] float keySpeed = 70f;
+  [SerializeField] float breakingForce = 300f;
+
+  public bool isBreaking { get; set; }
 
   protected float currSpeed;
 
-  float _currentBrk = 0f;
   Rigidbody _rigidbody;
 
   protected void Start()
@@ -52,10 +53,21 @@ public abstract class Vehicle : MonoBehaviour
       frontLeftWheel.motorTorque = 0f;
     }
 
-    frontRightWheel.brakeTorque = _currentBrk;
-    frontLeftWheel.brakeTorque = _currentBrk;
-    backRightWheel.brakeTorque = _currentBrk;
-    backLeftWheel.brakeTorque = _currentBrk;
+    if (isBreaking)
+    {
+      frontRightWheel.brakeTorque = breakingForce;
+      frontLeftWheel.brakeTorque = breakingForce;
+      backRightWheel.brakeTorque = breakingForce;
+      backLeftWheel.brakeTorque = breakingForce;
+    }
+    else
+    {
+      frontRightWheel.brakeTorque = 0f;
+      frontLeftWheel.brakeTorque = 0f;
+      backRightWheel.brakeTorque = 0f;
+      backLeftWheel.brakeTorque = 0f;
+    }
+
 
     UpdateWheel(frontRightWheel, frontRightTransform, frontRightRotationFix);
     UpdateWheel(frontLeftWheel, frontLeftTransform, frontLeftRotationFix);
