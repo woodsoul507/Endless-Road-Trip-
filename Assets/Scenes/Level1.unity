@@ -285,22 +285,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff444f927fc576f49bc3910f784c9d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies:
-  - {fileID: 1420398993}
-  - {fileID: 1660087061}
-  - {fileID: 224286211}
+  enemiesList:
   - {fileID: 1392720828}
+  - {fileID: 1420398993}
   - {fileID: 1579044398}
+  - {fileID: 1660087061}
   - {fileID: 1269957721}
-  - {fileID: 190574452447307279}
   - {fileID: 1379530813}
+  - {fileID: 224286211}
   - {fileID: 700890816}
   - {fileID: 1633267352}
+  - {fileID: 190574452447307279}
   lanes:
   - -2.5
   - -5
   - -7.5
   - -10
+  spawnRateTime: 1.25
 --- !u!1001 &216305362
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -563,6 +563,7 @@ MonoBehaviour:
   initialAcceleration: 6000
   maxSpeed: 90
   keySpeed: 65
+  breakingForce: 300
   leftConstraint: -10.6
   rightConstraint: -1.9
   maxTurnAngle: 15

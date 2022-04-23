@@ -43,8 +43,6 @@ public class PlayerController : Vehicle
         transform.position.z
       );
     }
-
-    // Debug.Log("SPEED --- " + currSpeed);
   }
 
   protected override void Turn()
@@ -53,9 +51,8 @@ public class PlayerController : Vehicle
     {
       currentTurn -= turnRate;
     }
-    if (!moveLeft && transform.localEulerAngles.y > 180f)
+    if (!moveLeft && transform.localEulerAngles.y > 179f)
     {
-      Debug.Log("!moveLeft --- " + transform.localEulerAngles.y);
       transform.Rotate(Vector3.up * Time.deltaTime * 5f);
     }
 
@@ -65,7 +62,6 @@ public class PlayerController : Vehicle
     }
     if (!moveRight && transform.localEulerAngles.y > 1f && transform.localEulerAngles.y < 180f)
     {
-      Debug.Log("!moveRight --- " + transform.localEulerAngles.y);
       transform.Rotate(Vector3.down * Time.deltaTime * 5f);
     }
 
