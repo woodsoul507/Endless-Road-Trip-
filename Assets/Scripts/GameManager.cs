@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -30,5 +31,15 @@ public class GameManager : MonoBehaviour
   {
     gameOver.SetActive(true);
     Time.timeScale = 0;
+  }
+
+  public void TryAgain()
+  {
+    SceneManager.LoadScene("Level1");
+  }
+
+  public void Exit()
+  {
+    SceneManager.LoadScene("Main Menu");
   }
 }
