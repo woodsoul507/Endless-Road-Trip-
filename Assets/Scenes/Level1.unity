@@ -235,7 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 788756035}
   gameOver: {fileID: 681515300}
-  startingHealth: 100
+  startingFuel: 100
 --- !u!4 &31051892
 Transform:
   m_ObjectHideFlags: 0
@@ -263,6 +263,7 @@ GameObject:
   - component: {fileID: 40437703}
   - component: {fileID: 40437702}
   - component: {fileID: 40437704}
+  - component: {fileID: 40437705}
   m_Layer: 0
   m_Name: SpawnManager
   m_TagString: Untagged
@@ -332,23 +333,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff444f927fc576f49bc3910f784c9d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesList:
+  elementList:
   - {fileID: 1392720828}
   - {fileID: 1420398993}
   - {fileID: 1579044398}
   - {fileID: 1660087061}
   - {fileID: 1269957721}
-  - {fileID: 1379530813}
   - {fileID: 224286211}
+  - {fileID: 1379530813}
+  - {fileID: 190574452447307279}
   - {fileID: 700890816}
   - {fileID: 1633267352}
-  - {fileID: 190574452447307279}
   lanes:
   - -2.5
   - -5
   - -7.5
   - -10
   spawnRateTime: 1.25
+  yPos: 0.4
+  spawnDistance: 300
+--- !u!114 &40437705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40437700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9e20a203296a3d46a8c5c156e9ba207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elementList:
+  - {fileID: 1647041621}
+  lanes:
+  - -2.5
+  - -5
+  - -7.5
+  - -10
+  spawnRateTime: 1.25
+  yPos: 0
+  spawnDistance: 150
 --- !u!1001 &216305362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1341,7 +1366,7 @@ GameObject:
   - component: {fileID: 870557240}
   - component: {fileID: 870557239}
   m_Layer: 5
-  m_Name: HealthBar
+  m_Name: FuelBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1475,6 +1500,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fuel
       objectReference: {fileID: 0}
+    - target: {fileID: 1409790019409704, guid: bcee27b2669c02b4da14364730e12bd3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4548368208436484, guid: bcee27b2669c02b4da14364730e12bd3, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1489,7 +1518,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4548368208436484, guid: bcee27b2669c02b4da14364730e12bd3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.83
+      value: 17.2
       objectReference: {fileID: 0}
     - target: {fileID: 4548368208436484, guid: bcee27b2669c02b4da14364730e12bd3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2748,6 +2777,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2707034523815860893}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1647041621 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1409790019409704, guid: bcee27b2669c02b4da14364730e12bd3,
+    type: 3}
+  m_PrefabInstance: {fileID: 893757457}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1660087061 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1209555985277952, guid: ff5eedd89420f9c459d85b555c38a7a2,
@@ -2959,6 +2994,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 296934908, guid: bfec9736616e0d74fa58c16f2e83dcdc, type: 3}
+      propertyPath: fuelBarText
+      value: 
+      objectReference: {fileID: 870557239}
+    - target: {fileID: 296934908, guid: bfec9736616e0d74fa58c16f2e83dcdc, type: 3}
       propertyPath: scoreBarText
       value: 
       objectReference: {fileID: 1113707317}
@@ -2970,6 +3009,10 @@ PrefabInstance:
       propertyPath: healthBarText
       value: 
       objectReference: {fileID: 870557239}
+    - target: {fileID: 296934914, guid: bfec9736616e0d74fa58c16f2e83dcdc, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1847148240549790, guid: bfec9736616e0d74fa58c16f2e83dcdc, type: 3}
       propertyPath: m_Name
       value: Player

@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4548368208436484
 Transform:
   m_ObjectHideFlags: 0
@@ -101,8 +101,9 @@ MonoBehaviour:
   rotateRate: 75
   bounceForce: 3
   maxHeight: 0.5
-  OnCollectRotateRate: 1500
-  OnCollectBounceForce: 15
+  onCollectRotateRate: 1500
+  onCollectBounceForce: 15
+  offScreenDisable: 60
   healAmount: 7
 --- !u!54 &1329024437
 Rigidbody:

@@ -13,10 +13,10 @@ public class PlayerController : Vehicle
   [SerializeField] float turnFixing = 5f;
   [SerializeField] int scoreRate = 10;
   [SerializeField] SpawnManager spawnManager;
-  [SerializeField] TextMeshProUGUI healthBarText;
+  [SerializeField] TextMeshProUGUI fuelBarText;
   [SerializeField] TextMeshProUGUI scoreBarText;
 
-  public int HealthBar { get; set; }
+  public int FuelBar { get; set; }
 
   int _score = 0;
   bool _moveLeft;
@@ -27,7 +27,7 @@ public class PlayerController : Vehicle
   new void Start()
   {
     base.Start();
-    healthBarText.text = "Health\n" + HealthBar + "%";
+    fuelBarText.text = "Fuel\n" + FuelBar + "%";
   }
 
   new void Update()
@@ -42,7 +42,7 @@ public class PlayerController : Vehicle
     }
 
     scoreBarText.text = "Score\n" + _score;
-    healthBarText.text = "Health\n" + HealthBar + "%";
+    fuelBarText.text = "Fuel\n" + FuelBar + "%";
 
     Turn();
 
@@ -89,6 +89,14 @@ public class PlayerController : Vehicle
     frontLeftWheel.steerAngle = _currentTurn;
   }
 
+  void OnCollisionEnter(Collision collision)
+  {
+    if (collision.gameObject.tag == "Enemy")
+    {
+      GettingDamage(collision.gameObject.GetComponent<EnemyVehicle>().Damage);
+    }
+  }
+
   void OnTriggerExit(Collider other)
   {
     if (other.gameObject.tag == "SpawnTrigger")
@@ -121,11 +129,11 @@ public class PlayerController : Vehicle
 
   public void GettingDamage(int contactDamage)
   {
-    HealthBar = HealthBar - contactDamage < 0 ? 0 : HealthBar - contactDamage;
+    FuelBar = FuelBar - contactDamage < 0 ? 0 : FuelBar - contactDamage;
   }
 
   public void GettingHeal(int healRate)
   {
-    HealthBar = HealthBar == 100 ? 100 : HealthBar + healRate;
+    FuelBar = FuelBar == 100 ? 100 : FuelBar + healRate;
   }
 }

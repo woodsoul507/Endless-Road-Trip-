@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Vehicle : MonoBehaviour
 {
+
   [SerializeField] protected WheelCollider frontRightWheel;
   [SerializeField] protected WheelCollider frontLeftWheel;
   [SerializeField] protected WheelCollider backRightWheel;
@@ -12,25 +13,30 @@ public abstract class Vehicle : MonoBehaviour
   [SerializeField] protected Transform frontLeftTransform;
   [SerializeField] protected Transform backRightTransform;
   [SerializeField] protected Transform backLeftTransform;
-  [SerializeField] bool fixWheelsRotation = false;
   [SerializeField] protected float frontRightRotationFix = 0f;
   [SerializeField] protected float frontLeftRotationFix = 0f;
   [SerializeField] protected float backRightRotationFix = 0f;
   [SerializeField] protected float backLeftRotationFix = 0f;
+  [SerializeField] protected int _damage = 7;
+  [SerializeField] bool fixWheelsRotation = false;
   [SerializeField] float acceleration = 500f;
   [SerializeField] float initialAcceleration = 3000f;
   [SerializeField] float maxSpeed = 120f;
   [SerializeField] float keySpeed = 70f;
   [SerializeField] float breakingForce = 300f;
+  [SerializeField] float offScreenDisable = 15f;
 
   public bool isBreaking { get; set; }
+  public int Damage { get { return _damage; } }
 
   protected float currSpeed;
 
   Rigidbody _rigidbody;
+  GameObject _player;
 
   protected void Start()
   {
+    _player = GameObject.FindGameObjectWithTag("Player");
     _rigidbody = gameObject.GetComponent<Rigidbody>();
   }
 
@@ -77,8 +83,7 @@ public abstract class Vehicle : MonoBehaviour
 
   protected virtual void Disable()
   {
-    GameObject player = GameObject.FindGameObjectWithTag("Player");
-    if (player.transform.position.z > gameObject.transform.position.z + 10f)
+    if (_player.transform.position.z > gameObject.transform.position.z + offScreenDisable)
     {
       gameObject.SetActive(false);
     }

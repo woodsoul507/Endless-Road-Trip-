@@ -7,21 +7,21 @@ public class GameManager : MonoBehaviour
 {
   [SerializeField] GameObject player;
   [SerializeField] GameObject gameOver;
-  [SerializeField] int startingHealth;
+  [SerializeField] int startingFuel;
 
-  int _playerHealthBar;
+  int _playerFuelBar;
 
   void Start()
   {
     Time.timeScale = 1;
-    player.GetComponent<PlayerController>().HealthBar = startingHealth;
+    player.GetComponent<PlayerController>().FuelBar = startingFuel;
   }
 
   void Update()
   {
-    _playerHealthBar = player.GetComponent<PlayerController>().HealthBar;
+    _playerFuelBar = player.GetComponent<PlayerController>().FuelBar;
 
-    if (_playerHealthBar <= 0)
+    if (_playerFuelBar <= 0)
     {
       GameOver();
     }

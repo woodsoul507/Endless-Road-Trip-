@@ -7,25 +7,35 @@ public abstract class PowerUp : MonoBehaviour
   [SerializeField] protected float rotateRate = 75f;
   [SerializeField] protected float bounceForce = 2f;
   [SerializeField] protected float maxHeight = 0.5f;
-  [SerializeField] protected float OnCollectRotateRate = 1500f;
-  [SerializeField] protected float OnCollectBounceForce = 15;
+  [SerializeField] protected float onCollectRotateRate = 1500f;
+  [SerializeField] protected float onCollectBounceForce = 15;
+  [SerializeField] protected float offScreenDisable = 60f;
 
   bool wasCollected;
 
   new Rigidbody rigidbody;
+  GameObject _player;
 
   void Awake()
   {
+    _player = GameObject.FindGameObjectWithTag("Player");
     rigidbody = gameObject.GetComponent<Rigidbody>();
   }
 
   void FixedUpdate()
   {
-    gameObject.transform.Rotate(Vector3.up * Time.deltaTime * (wasCollected ? OnCollectRotateRate : rotateRate), Space.Self);
+    Debug.Log("WAS   " + wasCollected);
+
+    if (_player.transform.position.z > gameObject.transform.position.z + offScreenDisable)
+    {
+      Disable();
+    }
+
+    gameObject.transform.Rotate(Vector3.up * Time.deltaTime * (wasCollected ? onCollectRotateRate : rotateRate), Space.Self);
 
     if (transform.position.y <= 0)
     {
-      rigidbody.AddForce(Vector3.up * (wasCollected ? OnCollectBounceForce : bounceForce), ForceMode.Impulse);
+      rigidbody.AddForce(Vector3.up * (wasCollected ? onCollectBounceForce : bounceForce), ForceMode.Impulse);
     }
 
     if (transform.position.y >= maxHeight && !wasCollected)
@@ -39,12 +49,12 @@ public abstract class PowerUp : MonoBehaviour
     if (!wasCollected)
     {
       wasCollected = true;
-      GetCollected();
+      OnCollected();
       Effect(other);
     }
   }
 
-  protected void GetCollected()
+  protected void OnCollected()
   {
     StartCoroutine(CollectingBounceWaitTime());
   }
@@ -53,6 +63,11 @@ public abstract class PowerUp : MonoBehaviour
   {
     yield return new WaitForSeconds(1);
     wasCollected = false;
+    Disable();
+  }
+
+  protected void Disable()
+  {
     gameObject.SetActive(false);
   }
 

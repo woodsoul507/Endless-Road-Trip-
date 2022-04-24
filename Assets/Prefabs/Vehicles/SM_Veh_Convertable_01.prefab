@@ -554,16 +554,18 @@ MonoBehaviour:
   frontLeftTransform: {fileID: 4108543681628124}
   backRightTransform: {fileID: 4216438474971106}
   backLeftTransform: {fileID: 4566214152681674}
-  fixWheelsRotation: 0
   frontRightRotationFix: 0
   frontLeftRotationFix: 0
   backRightRotationFix: 0
   backLeftRotationFix: 0
+  _damage: 7
+  fixWheelsRotation: 0
   acceleration: 500
   initialAcceleration: 6000
   maxSpeed: 90
   keySpeed: 65
   breakingForce: 300
+  offScreenDisable: 15
   leftConstraint: -10.1
   rightConstraint: -2.4
   maxTurnAngle: 15
@@ -571,7 +573,7 @@ MonoBehaviour:
   turnFixing: 5
   scoreRate: 10
   spawnManager: {fileID: 0}
-  healthBarText: {fileID: 0}
+  fuelBarText: {fileID: 0}
   scoreBarText: {fileID: 0}
 --- !u!1 &1925197282100688
 GameObject:
