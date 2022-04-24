@@ -2,22 +2,29 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : Vehicle
 {
-  [SerializeField] float leftConstraint = -10.6f;
-  [SerializeField] float rightConstraint = -1.9f;
+  [SerializeField] float leftConstraint = -10.1f;
+  [SerializeField] float rightConstraint = -2.4f;
   [SerializeField] float maxTurnAngle = 15f;
   [SerializeField] float turnRate = 0.02f;
+  [SerializeField] int contactDamage = 7;
+  [SerializeField] int powerUpsHeal = 7;
   [SerializeField] SpawnManager spawnManager;
+  [SerializeField] TextMeshProUGUI healthBarText;
 
-  bool moveLeft;
-  bool moveRight;
-  float currentTurn = 0f;
+  public int HealthBar { get; set; }
+
+  bool _moveLeft;
+  bool _moveRight;
+  float _currentTurn = 0f;
 
   new void Start()
   {
     base.Start();
+    healthBarText.text = "Health\n" + HealthBar + "%";
   }
 
   new void Update()
@@ -47,26 +54,26 @@ public class PlayerController : Vehicle
 
   protected override void Turn()
   {
-    if (moveLeft && Math.Abs(currentTurn) < maxTurnAngle)
+    if (_moveLeft && Math.Abs(_currentTurn) < maxTurnAngle)
     {
-      currentTurn -= turnRate;
+      _currentTurn -= turnRate;
     }
-    if (!moveLeft && transform.localEulerAngles.y > 179f)
+    if (!_moveLeft && transform.localEulerAngles.y > 179f)
     {
       transform.Rotate(Vector3.up * Time.deltaTime * 5f);
     }
 
-    if (moveRight && Math.Abs(currentTurn) < maxTurnAngle)
+    if (_moveRight && Math.Abs(_currentTurn) < maxTurnAngle)
     {
-      currentTurn += turnRate;
+      _currentTurn += turnRate;
     }
-    if (!moveRight && transform.localEulerAngles.y > 1f && transform.localEulerAngles.y < 180f)
+    if (!_moveRight && transform.localEulerAngles.y > 1f && transform.localEulerAngles.y < 180f)
     {
       transform.Rotate(Vector3.down * Time.deltaTime * 5f);
     }
 
-    frontRightWheel.steerAngle = currentTurn;
-    frontLeftWheel.steerAngle = currentTurn;
+    frontRightWheel.steerAngle = _currentTurn;
+    frontLeftWheel.steerAngle = _currentTurn;
   }
 
   void OnTriggerExit(Collider other)
@@ -77,25 +84,50 @@ public class PlayerController : Vehicle
     }
   }
 
+  void OnCollisionEnter(Collision collision)
+  {
+    if (collision.gameObject.tag == "Enemy")
+    {
+      GettingDamage();
+      healthBarText.text = "Health\n" + HealthBar + "%";
+    }
+
+    if (collision.gameObject.tag == "PowerUp")
+    {
+      GettingHeal();
+      healthBarText.text = "Health\n" + HealthBar + "%";
+    }
+  }
+
   public void MoveLeftOn()
   {
-    moveLeft = true;
+    _moveLeft = true;
   }
 
   public void MoveLeftOff()
   {
-    moveLeft = false;
-    currentTurn = 0f;
+    _moveLeft = false;
+    _currentTurn = 0f;
   }
 
   public void MoveRightOn()
   {
-    moveRight = true;
+    _moveRight = true;
   }
 
   public void MoveRightOff()
   {
-    moveRight = false;
-    currentTurn = 0f;
+    _moveRight = false;
+    _currentTurn = 0f;
+  }
+
+  void GettingDamage()
+  {
+    HealthBar = HealthBar - contactDamage < 0 ? 0 : HealthBar - contactDamage;
+  }
+
+  void GettingHeal()
+  {
+    HealthBar = HealthBar == 100 ? 100 : HealthBar + powerUpsHeal;
   }
 }
