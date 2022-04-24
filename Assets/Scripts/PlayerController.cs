@@ -12,11 +12,14 @@ public class PlayerController : Vehicle
   [SerializeField] float turnRate = 0.02f;
   [SerializeField] int contactDamage = 7;
   [SerializeField] int powerUpsHeal = 7;
+  [SerializeField] int scoreRate = 10;
   [SerializeField] SpawnManager spawnManager;
   [SerializeField] TextMeshProUGUI healthBarText;
+  [SerializeField] TextMeshProUGUI scoreBarText;
 
   public int HealthBar { get; set; }
 
+  int _score = 0;
   bool _moveLeft;
   bool _moveRight;
   float _currentTurn = 0f;
@@ -30,6 +33,13 @@ public class PlayerController : Vehicle
   new void Update()
   {
     base.Update();
+
+    if (_score < transform.position.z)
+    {
+      _score = (int)transform.position.z / scoreRate;
+    }
+
+    scoreBarText.text = "Score\n" + _score;
 
     Turn();
 
