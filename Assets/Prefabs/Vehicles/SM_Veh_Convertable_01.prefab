@@ -564,11 +564,15 @@ MonoBehaviour:
   maxSpeed: 90
   keySpeed: 65
   breakingForce: 300
-  leftConstraint: -10.6
-  rightConstraint: -1.9
+  leftConstraint: -10.1
+  rightConstraint: -2.4
   maxTurnAngle: 15
   turnRate: 0.02
+  turnFixing: 5
+  scoreRate: 10
   spawnManager: {fileID: 0}
+  healthBarText: {fileID: 0}
+  scoreBarText: {fileID: 0}
 --- !u!1 &1925197282100688
 GameObject:
   m_ObjectHideFlags: 0

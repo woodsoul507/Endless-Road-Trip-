@@ -10,8 +10,7 @@ public class PlayerController : Vehicle
   [SerializeField] float rightConstraint = -2.4f;
   [SerializeField] float maxTurnAngle = 15f;
   [SerializeField] float turnRate = 0.02f;
-  [SerializeField] int contactDamage = 7;
-  [SerializeField] int powerUpsHeal = 7;
+  [SerializeField] float turnFixing = 5f;
   [SerializeField] int scoreRate = 10;
   [SerializeField] SpawnManager spawnManager;
   [SerializeField] TextMeshProUGUI healthBarText;
@@ -22,6 +21,7 @@ public class PlayerController : Vehicle
   int _score = 0;
   bool _moveLeft;
   bool _moveRight;
+  int _tempScore = 0;
   float _currentTurn = 0f;
 
   new void Start()
@@ -34,12 +34,15 @@ public class PlayerController : Vehicle
   {
     base.Update();
 
-    if (_score < transform.position.z)
+    _tempScore = (int)transform.position.z / scoreRate;
+
+    if (_score < _tempScore)
     {
-      _score = (int)transform.position.z / scoreRate;
+      _score = _tempScore;
     }
 
     scoreBarText.text = "Score\n" + _score;
+    healthBarText.text = "Health\n" + HealthBar + "%";
 
     Turn();
 
@@ -70,7 +73,7 @@ public class PlayerController : Vehicle
     }
     if (!_moveLeft && transform.localEulerAngles.y > 179f)
     {
-      transform.Rotate(Vector3.up * Time.deltaTime * 5f);
+      transform.Rotate(Vector3.up * Time.deltaTime * turnFixing);
     }
 
     if (_moveRight && Math.Abs(_currentTurn) < maxTurnAngle)
@@ -79,7 +82,7 @@ public class PlayerController : Vehicle
     }
     if (!_moveRight && transform.localEulerAngles.y > 1f && transform.localEulerAngles.y < 180f)
     {
-      transform.Rotate(Vector3.down * Time.deltaTime * 5f);
+      transform.Rotate(Vector3.down * Time.deltaTime * turnFixing);
     }
 
     frontRightWheel.steerAngle = _currentTurn;
@@ -91,21 +94,6 @@ public class PlayerController : Vehicle
     if (other.gameObject.tag == "SpawnTrigger")
     {
       spawnManager.SpawnTriggerExit();
-    }
-  }
-
-  void OnCollisionEnter(Collision collision)
-  {
-    if (collision.gameObject.tag == "Enemy")
-    {
-      GettingDamage();
-      healthBarText.text = "Health\n" + HealthBar + "%";
-    }
-
-    if (collision.gameObject.tag == "PowerUp")
-    {
-      GettingHeal();
-      healthBarText.text = "Health\n" + HealthBar + "%";
     }
   }
 
@@ -131,13 +119,13 @@ public class PlayerController : Vehicle
     _currentTurn = 0f;
   }
 
-  void GettingDamage()
+  public void GettingDamage(int contactDamage)
   {
     HealthBar = HealthBar - contactDamage < 0 ? 0 : HealthBar - contactDamage;
   }
 
-  void GettingHeal()
+  public void GettingHeal(int healRate)
   {
-    HealthBar = HealthBar == 100 ? 100 : HealthBar + powerUpsHeal;
+    HealthBar = HealthBar == 100 ? 100 : HealthBar + healRate;
   }
 }
