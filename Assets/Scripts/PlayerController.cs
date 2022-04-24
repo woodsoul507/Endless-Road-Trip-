@@ -46,6 +46,8 @@ public class PlayerController : Vehicle
 
     Turn();
 
+    KeyboardControls();
+
     if (transform.position.x > rightConstraint)
     {
       transform.position = new Vector3(
@@ -102,6 +104,30 @@ public class PlayerController : Vehicle
     if (other.gameObject.tag == "SpawnTrigger")
     {
       spawnManager.SpawnTriggerExit();
+    }
+  }
+
+  void KeyboardControls()
+  {
+
+    if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+    {
+      MoveLeftOn();
+    }
+
+    if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A))
+    {
+      MoveLeftOff();
+    }
+
+    if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+    {
+      MoveRightOn();
+    }
+
+    if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D))
+    {
+      MoveRightOff();
     }
   }
 

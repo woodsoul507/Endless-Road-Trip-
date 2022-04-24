@@ -24,8 +24,6 @@ public abstract class PowerUp : MonoBehaviour
 
   void FixedUpdate()
   {
-    Debug.Log("WAS   " + wasCollected);
-
     if (_player.transform.position.z > gameObject.transform.position.z + offScreenDisable)
     {
       Disable();
