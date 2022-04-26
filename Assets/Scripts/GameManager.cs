@@ -74,11 +74,20 @@ public class GameManager : MonoBehaviour
 
   public void TryAgain()
   {
+    SaveSceneName();
     SceneManager.LoadScene("Level1");
   }
 
   public void Exit()
   {
+    SaveSceneName();
     SceneManager.LoadScene("Main Menu");
+  }
+
+  void SaveSceneName()
+  {
+    string currentScene = SceneManager.GetActiveScene().name;
+    PlayerPrefs.SetString("LastScene", currentScene);
+    PlayerPrefs.Save();
   }
 }

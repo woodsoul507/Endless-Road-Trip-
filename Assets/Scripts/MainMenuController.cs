@@ -7,6 +7,7 @@ public class MainMenuController : MonoBehaviour
 {
   public void StartApp()
   {
+    SaveSceneName();
     SceneManager.LoadScene("Level1");
   }
   public void QuitApp()
@@ -15,5 +16,12 @@ public class MainMenuController : MonoBehaviour
 #if UNITY_EDITOR
     UnityEditor.EditorApplication.isPlaying = false;
 #endif
+  }
+
+  void SaveSceneName()
+  {
+    string currentScene = SceneManager.GetActiveScene().name;
+    PlayerPrefs.SetString("LastScene", currentScene);
+    PlayerPrefs.Save();
   }
 }
