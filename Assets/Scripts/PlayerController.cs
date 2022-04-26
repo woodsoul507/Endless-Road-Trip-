@@ -16,6 +16,7 @@ public class PlayerController : Vehicle
   [SerializeField] TextMeshProUGUI fuelBarText;
   [SerializeField] TextMeshProUGUI scoreBarText;
 
+  // ENCAPSULATION
   public int FuelBar { get; set; }
   public int RoadsPushedBack { get { return _roadsPushedBack; } set { _roadsPushedBack = value; } }
 
@@ -69,6 +70,8 @@ public class PlayerController : Vehicle
     }
   }
 
+  // ABSTRACTION
+  // POLYMORPHISM
   protected override void Turn()
   {
     if (_moveLeft && Math.Abs(_currentTurn) < maxTurnAngle)
@@ -124,6 +127,7 @@ public class PlayerController : Vehicle
     }
   }
 
+  // ABSTRACTION
   void KeyboardControls()
   {
 

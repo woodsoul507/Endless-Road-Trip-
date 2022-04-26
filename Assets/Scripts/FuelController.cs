@@ -14,6 +14,7 @@ public class FuelController : PowerUp
     }
   }
 
+  // POLYMORPHISM
   protected override void Effect(Collider other)
   {
     other.gameObject.GetComponent<PlayerController>().GettingHeal(healAmount);

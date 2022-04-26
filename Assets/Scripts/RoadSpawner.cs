@@ -17,6 +17,7 @@ public class RoadSpawner : MonoBehaviour
     }
   }
 
+  // ABSTRACTION
   public void MoveRoad()
   {
     GameObject movedRoad = roads[0];

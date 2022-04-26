@@ -6,6 +6,7 @@ public class SpawnManager : MonoBehaviour
 {
   [SerializeField] int roadsBeforeSpawn = 4;
 
+  // ENCAPSULATION
   public int RoadsCounter { get { return _roadsCounter; } set { _roadsCounter = value; } }
 
   RoadSpawner _roadSpawner;

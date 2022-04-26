@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// INHERITANCE
 public abstract class Vehicle : MonoBehaviour
 {
   [SerializeField] protected WheelCollider frontRightWheel;
@@ -27,6 +28,7 @@ public abstract class Vehicle : MonoBehaviour
   [SerializeField] float breakingForce = 300f;
   [SerializeField] float offScreenDisable = 15f;
 
+  // ENCAPSULATION
   public bool IsBreaking { get; set; }
   public int Damage { get { return _damage; } }
   public float FreezeTime { get { return _freezeTime; } set { _freezeTime = value; } }
@@ -103,6 +105,7 @@ public abstract class Vehicle : MonoBehaviour
     }
   }
 
+  // ABSTRACTION
   protected virtual void UpdateWheel(WheelCollider col, Transform trans, float fixRotation)
   {
     Vector3 position;

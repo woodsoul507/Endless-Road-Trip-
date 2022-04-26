@@ -6,6 +6,7 @@ public class EnemyVehicle : Vehicle
 {
   [SerializeField] public FrontCollider _frontCollider;
 
+  // ENCAPSULATION
   public bool IsDamageAble { get { return _isDamageAble; } set { _isDamageAble = value; } }
 
   bool _isDamageAble = true;
@@ -24,8 +25,10 @@ public class EnemyVehicle : Vehicle
     }
   }
 
+  // POLYMORPHISM
+  // ABSTRACTION
   protected override void Turn()
   {
-    // Not needed yet
+    // TODO: enemy try to collide player soon
   }
 }

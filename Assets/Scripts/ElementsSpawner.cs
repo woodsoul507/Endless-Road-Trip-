@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+// INHERITANCE
 public class ElementsSpawner : MonoBehaviour
 {
   [SerializeField] List<GameObject> elementList;
@@ -48,6 +49,7 @@ public class ElementsSpawner : MonoBehaviour
     }
   }
 
+  // ABSTRACTION
   void RelocateElement()
   {
     GameObject currElement = _elements.Dequeue();
@@ -67,6 +69,7 @@ public class ElementsSpawner : MonoBehaviour
     _elements.Enqueue(currElement);
   }
 
+  // ABSTRACTION
   Vector3 positionGenerator()
   {
     float tempLane = lanes[Random.Range(0, 4)];

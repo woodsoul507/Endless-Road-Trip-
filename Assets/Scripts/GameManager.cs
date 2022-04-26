@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     }
   }
 
+  // ABSTRACTION
   void PlayerFreezed()
   {
     player.gameObject.GetComponent<PlayerController>().GettingDamage(stuckDamage);
@@ -67,12 +68,14 @@ public class GameManager : MonoBehaviour
     Time.timeScale = 1;
   }
 
+  // ABSTRACTION
   void GameOver()
   {
     gameOver.SetActive(true);
     Time.timeScale = 0;
   }
 
+  // ABSTRACTION
   public void TryAgain()
   {
     SaveSceneName();

@@ -52,6 +52,7 @@ public abstract class PowerUp : MonoBehaviour
     }
   }
 
+  // ABSTRACTION
   protected void OnCollected()
   {
     StartCoroutine(CollectingBounceWaitTime());

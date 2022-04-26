@@ -18,6 +18,7 @@ public class MainMenuController : MonoBehaviour
 #endif
   }
 
+  // ABSTRACTION
   void SaveSceneName()
   {
     string currentScene = SceneManager.GetActiveScene().name;
