@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     {
       if (enemy.gameObject.activeSelf && (enemy.gameObject.GetComponent<EnemyVehicle>().FreezeTime >=
       enemy.gameObject.GetComponent<EnemyVehicle>().FreezeTimeAllowed ||
-      enemy.gameObject.transform.position.z < player.gameObject.transform.position.z + 60f))
+      enemy.gameObject.transform.position.z < player.gameObject.transform.position.z + 120f))
       {
         enemy.gameObject.SetActive(false);
       }
