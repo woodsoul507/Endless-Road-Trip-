@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
   [SerializeField] GameObject gameOver;
   [SerializeField] int startingFuel;
   [SerializeField] int stuckDamage = 7;
+  [SerializeField] float disableEnemiesAfterStuckRange = 120f;
 
   int _playerFuelBar;
 
@@ -48,7 +49,7 @@ public class GameManager : MonoBehaviour
     {
       if (enemy.gameObject.activeSelf && (enemy.gameObject.GetComponent<EnemyVehicle>().FreezeTime >=
       enemy.gameObject.GetComponent<EnemyVehicle>().FreezeTimeAllowed ||
-      enemy.gameObject.transform.position.z < player.gameObject.transform.position.z + 120f))
+      enemy.gameObject.transform.position.z < player.gameObject.transform.position.z + disableEnemiesAfterStuckRange))
       {
         enemy.gameObject.SetActive(false);
       }
