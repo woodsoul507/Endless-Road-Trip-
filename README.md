@@ -19,6 +19,10 @@
 
 It is just a prototype project in order to complete the final submission of the Junior Programmer Path from Unity Learn.
 
+Playable version can be found [HERE](https://play.unity.com/mg/other/webgl-builds-186097)
+
+Still need to add sounds.
+
 ## :memo: License ##
 
 Code of this project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
