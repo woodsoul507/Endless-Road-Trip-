@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
   [SerializeField] GameObject player;
   [SerializeField] GameObject gameOver;
   [SerializeField] int startingFuel;
+  [SerializeField] int stuckDamage = 7;
 
   int _playerFuelBar;
 
@@ -19,12 +20,50 @@ public class GameManager : MonoBehaviour
 
   void Update()
   {
+    if (player.GetComponent<PlayerController>().FreezeTime >=
+    player.GetComponent<PlayerController>().FreezeTimeAllowed ||
+    player.GetComponent<PlayerController>().RoadsPushedBack >= 2)
+    {
+      player.GetComponent<PlayerController>().FreezeTime = 0f;
+      player.GetComponent<PlayerController>().RoadsPushedBack = 0;
+      PlayerFreezed();
+    }
+
     _playerFuelBar = player.GetComponent<PlayerController>().FuelBar;
 
     if (_playerFuelBar <= 0)
     {
       GameOver();
     }
+  }
+
+  void PlayerFreezed()
+  {
+    player.gameObject.GetComponent<PlayerController>().GettingDamage(stuckDamage);
+
+    Time.timeScale = 0;
+
+    List<EnemyVehicle> enemies = new List<EnemyVehicle>(FindObjectsOfType<EnemyVehicle>());
+    enemies.ForEach(enemy =>
+    {
+      if (enemy.gameObject.activeSelf && (enemy.gameObject.GetComponent<EnemyVehicle>().FreezeTime >=
+      enemy.gameObject.GetComponent<EnemyVehicle>().FreezeTimeAllowed ||
+      enemy.gameObject.transform.position.z < player.gameObject.transform.position.z + 60f))
+      {
+        enemy.gameObject.SetActive(false);
+      }
+    });
+
+    player.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+    player.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+    player.gameObject.transform.position = new Vector3(
+      player.gameObject.transform.position.x,
+      0f,
+      player.gameObject.transform.position.z
+    );
+    player.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.forward * 5500, ForceMode.Impulse);
+
+    Time.timeScale = 1;
   }
 
   void GameOver()

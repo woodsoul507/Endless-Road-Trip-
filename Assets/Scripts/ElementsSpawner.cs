@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ElementsSpawner : MonoBehaviour
@@ -17,7 +18,9 @@ public class ElementsSpawner : MonoBehaviour
 
   void OnEnable()
   {
-    foreach (GameObject element in elementList)
+    var rnd = new System.Random();
+    var tempElementList = elementList.OrderBy(item => rnd.Next());
+    foreach (GameObject element in tempElementList)
     {
       _elements.Enqueue(element);
     }
@@ -28,34 +31,40 @@ public class ElementsSpawner : MonoBehaviour
     _playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
     currTime += Time.deltaTime;
 
-    // Adding some random order on the enemies spawn
-    if (Random.Range(0, 1) == 0)
+    // Adding some randomize on the enemies spawn
+    if (UnityEngine.Random.Range(0, 1) == 0)
     {
-      GameObject tempEnemy = _elements.Dequeue();
-      _elements.Enqueue(tempEnemy);
+      _elements.Enqueue(_elements.Dequeue());
     }
 
     if (!_elements.Peek().activeSelf && currTime >= spawnRateTime)
     {
-      RelocateEnemies();
+      RelocateElement();
       currTime = 0f;
+    }
+    else
+    {
+      _elements.Enqueue(_elements.Dequeue());
     }
   }
 
-  void RelocateEnemies()
+  void RelocateElement()
   {
-    GameObject currEnemy = _elements.Dequeue();
+    GameObject currElement = _elements.Dequeue();
     Vector3 newPosition = positionGenerator();
 
-    currEnemy.transform.rotation = Quaternion.Euler(0, 180, 0);
-    currEnemy.transform.position = newPosition;
-    currEnemy.SetActive(true);
-    if (currEnemy.gameObject.tag == "Enemy")
+    currElement.transform.rotation = Quaternion.Euler(0, 180, 0);
+    currElement.transform.position = newPosition;
+    currElement.SetActive(true);
+    if (currElement.gameObject.tag == "Enemy")
     {
-      currEnemy.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.forward * -2000f, ForceMode.Impulse);
+      currElement.gameObject.GetComponent<EnemyVehicle>()._frontCollider.isCollider = false;
+      currElement.gameObject.GetComponent<EnemyVehicle>().IsBreaking = false;
+      currElement.gameObject.GetComponent<EnemyVehicle>().IsDamageAble = true;
+      currElement.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.forward * -2000f, ForceMode.Impulse);
     }
 
-    _elements.Enqueue(currEnemy);
+    _elements.Enqueue(currElement);
   }
 
   Vector3 positionGenerator()

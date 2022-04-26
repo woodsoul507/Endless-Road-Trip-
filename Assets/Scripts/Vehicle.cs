@@ -4,7 +4,6 @@ using UnityEngine;
 
 public abstract class Vehicle : MonoBehaviour
 {
-
   [SerializeField] protected WheelCollider frontRightWheel;
   [SerializeField] protected WheelCollider frontLeftWheel;
   [SerializeField] protected WheelCollider backRightWheel;
@@ -17,6 +16,8 @@ public abstract class Vehicle : MonoBehaviour
   [SerializeField] protected float frontLeftRotationFix = 0f;
   [SerializeField] protected float backRightRotationFix = 0f;
   [SerializeField] protected float backLeftRotationFix = 0f;
+  [SerializeField] protected float _freezeTimeAllowed = 3f;
+  [SerializeField] protected float minVelocityAllowed = 3f;
   [SerializeField] protected int _damage = 7;
   [SerializeField] bool fixWheelsRotation = false;
   [SerializeField] float acceleration = 500f;
@@ -26,12 +27,15 @@ public abstract class Vehicle : MonoBehaviour
   [SerializeField] float breakingForce = 300f;
   [SerializeField] float offScreenDisable = 15f;
 
-  public bool isBreaking { get; set; }
+  public bool IsBreaking { get; set; }
   public int Damage { get { return _damage; } }
+  public float FreezeTime { get { return _freezeTime; } set { _freezeTime = value; } }
+  public float FreezeTimeAllowed { get { return _freezeTimeAllowed; } }
 
-  protected float currSpeed;
+  protected float _currSpeed;
+  protected float _freezeTime = 0;
 
-  Rigidbody _rigidbody;
+  protected Rigidbody _rigidbody;
   GameObject _player;
 
   protected void Start()
@@ -42,16 +46,26 @@ public abstract class Vehicle : MonoBehaviour
 
   protected void Update()
   {
-    currSpeed = _rigidbody.velocity.magnitude * 3.6f;
+    _currSpeed = _rigidbody.velocity.magnitude * 3.6f;
+
+    if (_rigidbody.velocity.sqrMagnitude <= minVelocityAllowed)
+    {
+      _freezeTime += Time.deltaTime;
+    }
+    else
+    {
+      _freezeTime = 0f;
+    }
+
     Disable();
   }
 
   protected void FixedUpdate()
   {
-    if (currSpeed < maxSpeed)
+    if (_currSpeed < maxSpeed)
     {
-      frontRightWheel.motorTorque = currSpeed < keySpeed ? initialAcceleration : acceleration;
-      frontLeftWheel.motorTorque = currSpeed < keySpeed ? initialAcceleration : acceleration;
+      frontRightWheel.motorTorque = _currSpeed < keySpeed ? initialAcceleration : acceleration;
+      frontLeftWheel.motorTorque = _currSpeed < keySpeed ? initialAcceleration : acceleration;
     }
     else
     {
@@ -59,7 +73,7 @@ public abstract class Vehicle : MonoBehaviour
       frontLeftWheel.motorTorque = 0f;
     }
 
-    if (isBreaking)
+    if (IsBreaking)
     {
       frontRightWheel.brakeTorque = breakingForce;
       frontLeftWheel.brakeTorque = breakingForce;

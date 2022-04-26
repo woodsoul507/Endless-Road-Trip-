@@ -558,6 +558,8 @@ MonoBehaviour:
   frontLeftRotationFix: 0
   backRightRotationFix: 0
   backLeftRotationFix: 0
+  _freezeTimeAllowed: 3
+  minVelocityAllowed: 3
   _damage: 7
   fixWheelsRotation: 0
   acceleration: 500

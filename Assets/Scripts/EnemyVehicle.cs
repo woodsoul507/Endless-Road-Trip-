@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class EnemyVehicle : Vehicle
 {
-  [SerializeField] FrontCollider _frontCollider;
+  [SerializeField] public FrontCollider _frontCollider;
+
+  public bool IsDamageAble { get { return _isDamageAble; } set { _isDamageAble = value; } }
+
+  bool _isDamageAble = true;
 
   new void Update()
   {
@@ -12,11 +16,11 @@ public class EnemyVehicle : Vehicle
 
     if (_frontCollider.isCollider)
     {
-      base.isBreaking = true;
+      base.IsBreaking = true;
     }
     else
     {
-      base.isBreaking = false;
+      base.IsBreaking = false;
     }
   }
 

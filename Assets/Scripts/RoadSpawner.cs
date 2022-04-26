@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class RoadSpawner : MonoBehaviour
 {
-  public List<GameObject> roads;
+  [SerializeField] List<GameObject> roads;
 
-  private float offSet = 50f;
+  float offSet = 50f;
 
   void Start()
   {
@@ -23,6 +23,7 @@ public class RoadSpawner : MonoBehaviour
     roads.Remove(movedRoad);
     float newZ = roads[roads.Count - 1].transform.position.z + offSet;
     movedRoad.transform.position = new Vector3(0, 0, newZ);
+    movedRoad.gameObject.GetComponentInChildren<Road>().WasTriggered = false;
     roads.Add(movedRoad);
   }
 }

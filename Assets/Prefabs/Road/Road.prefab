@@ -26,6 +26,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1997508314016017868}
   - {fileID: 1997508312599851701}
@@ -51,6 +52,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1997508313248004383}
   - component: {fileID: 1997508313248004376}
+  - component: {fileID: 4959863027866297081}
   m_Layer: 0
   m_Name: SpawnTrigger
   m_TagString: SpawnTrigger
@@ -68,6 +70,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.28, y: 0, z: 44}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1997508312129864773}
   m_RootOrder: 10
@@ -85,6 +88,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 12.405695, y: 2.986328, z: 0.8272209}
   m_Center: {x: 0.023448944, y: 1.3717166, z: 0.4854374}
+--- !u!114 &4959863027866297081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997508313248004382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 827baee2486b35a43b42e403dcdfef98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1997508312149450033
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -17,12 +17,14 @@ public class PlayerController : Vehicle
   [SerializeField] TextMeshProUGUI scoreBarText;
 
   public int FuelBar { get; set; }
+  public int RoadsPushedBack { get { return _roadsPushedBack; } set { _roadsPushedBack = value; } }
 
   int _score = 0;
   bool _moveLeft;
   bool _moveRight;
   int _tempScore = 0;
   float _currentTurn = 0f;
+  int _roadsPushedBack = 0;
 
   new void Start()
   {
@@ -93,8 +95,9 @@ public class PlayerController : Vehicle
 
   void OnCollisionEnter(Collision collision)
   {
-    if (collision.gameObject.tag == "Enemy")
+    if (collision.gameObject.tag == "Enemy" && collision.gameObject.GetComponent<EnemyVehicle>().IsDamageAble)
     {
+      collision.gameObject.GetComponent<EnemyVehicle>().IsDamageAble = false;
       GettingDamage(collision.gameObject.GetComponent<EnemyVehicle>().Damage);
     }
   }
@@ -103,7 +106,21 @@ public class PlayerController : Vehicle
   {
     if (other.gameObject.tag == "SpawnTrigger")
     {
-      spawnManager.SpawnTriggerExit();
+      if (!other.gameObject.GetComponent<Road>().WasTriggered)
+      {
+        other.gameObject.GetComponent<Road>().WasTriggered = true;
+        _roadsPushedBack = 0;
+        spawnManager.SpawnTriggerExit();
+      }
+      else
+      {
+        if (_roadsPushedBack < 2)
+        {
+          _roadsPushedBack++;
+        }
+        FindObjectOfType<SpawnManager>().RoadsCounter--;
+        other.gameObject.GetComponent<Road>().WasTriggered = false;
+      }
     }
   }
 

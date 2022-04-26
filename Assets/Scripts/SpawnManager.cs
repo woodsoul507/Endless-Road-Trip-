@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+  [SerializeField] int roadsBeforeSpawn = 4;
+
+  public int RoadsCounter { get { return _roadsCounter; } set { _roadsCounter = value; } }
+
   RoadSpawner _roadSpawner;
+  int _roadsCounter = 0;
 
   void Start()
   {
@@ -13,6 +18,12 @@ public class SpawnManager : MonoBehaviour
 
   public void SpawnTriggerExit()
   {
-    _roadSpawner.MoveRoad();
+    _roadsCounter++;
+
+    if (_roadsCounter >= roadsBeforeSpawn)
+    {
+      _roadSpawner.MoveRoad();
+      _roadsCounter = roadsBeforeSpawn - 1;
+    }
   }
 }
